@@ -54,7 +54,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 
 // Number of axes (3-5 supported on T41U5XBB)
 //Set this in config.h
-//#define N_AXIS 4 // Uncomment and set to 4 or 5 for additional axes
+#define N_AXIS 4 // Uncomment and set to 4 or 5 for additional axes
 
 #ifndef USB_SERIAL_CDC
 #define USB_SERIAL_CDC         2 // 1 for Arduino class library and 2 for PJRC C library. Comment out or set to 0 to use UART communication.
