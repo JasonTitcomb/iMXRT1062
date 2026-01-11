@@ -53,11 +53,14 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 */
 
 // Number of axes (3-5 supported on T41U5XBB)
-//Set this in config.h if you have problems
+//Set these in config.h 
+//N_AXIS has a default value of 3, edit grbl\config.h to increase.
 
+#define ENABLE_JERK_ACCELERATION On // Enable jerk and acceleration settings and compensation.
 #define MIN_FEED_RATE_OVERRIDE 1 // Set minimum feed rate override to 1%
 #define MAX_FEED_RATE_OVERRIDE 200 // Set maximum feed rate override to 200%
 #define DEFAULT_REPORT_INCHES On // Default to inches in status reports
+
 #ifndef USB_SERIAL_CDC
 #define USB_SERIAL_CDC         2 // 1 for Arduino class library and 2 for PJRC C library. Comment out or set to 0 to use UART communication.
 #endif
