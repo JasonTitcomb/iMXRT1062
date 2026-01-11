@@ -24,32 +24,40 @@
 // NOTE: Only one board may be enabled!
 // If none is enabled pin mappings from generic_map.h will be used
 //#define BOARD_T40X101
-//#define BOARD_T41U5XBB
+#define BOARD_T41U5XBB
 //#define BOARD_T41U5XBB_SS // For a modified T41U5XBB board, allows spindle sync to be enabled.
 //#define BOARD_T41BB5X_PRO
 //#define BOARD_CNC_BOOSTERPACK
 //#define BOARD_GRBLHAL2000
 //#define BOARD_MY_MACHINE // Add my_machine_map.h before enabling this!
+
 //#define BAUD_RATE 230400
 // Configuration
 // Uncomment to enable, for some a value > 1 may be assigned, if so the default value is shown.
 
 /*
-              Plugin: | ETHERNET¹ | SDCARD¹ | KEYPAD | EEPROM | N_AXIS |
+              Plugin: | ETHERNETï¿½ | SDCARDï¿½ | KEYPAD | EEPROM | N_AXIS |
 ----------------------|-----------|---------|--------|--------|--------|
-BOARD_T40X101         | no        | no      | yes    | yes³   | max 4  |
-BOARD_T41U5XBB        | yes       | yes     | yes    | yes³   | max 5  |
+BOARD_T40X101         | no        | no      | yes    | yesï¿½   | max 4  |
+BOARD_T41U5XBB        | yes       | yes     | yes    | yesï¿½   | max 5  |
 BOARD_T41BB5X_PRO     | yes       | yes     | yes    | yes    | max 5  |
-BOARD_CNC_BOOSTERPACK | yes²      | yes     | yes    | yes    | max 3  |
+BOARD_CNC_BOOSTERPACK | yesï¿½      | yes     | yes    | yes    | max 3  |
 BOARD_GRBLHAL2000     | yes       | yes     | yes    | yes    | max 5  |
 
-¹ Teensy 4.1 only
-² External magjack.
-³ EEPROM is optional and must be added to the board.
+ï¿½ Teensy 4.1 only
+ï¿½ External magjack.
+ï¿½ EEPROM is optional and must be added to the board.
 
 N_AXIS has a default value of 3, edit grbl\config.h to increase.
 
 */
+
+// Number of axes (3-5 supported on T41U5XBB)
+//Set this in config.h if you have problems
+
+#define MIN_FEED_RATE_OVERRIDE 1 // Set minimum feed rate override to 1%
+#define MAX_FEED_RATE_OVERRIDE 200 // Set maximum feed rate override to 200%
+#define DEFAULT_REPORT_INCHES On // Default to inches in status reports
 #ifndef USB_SERIAL_CDC
 #define USB_SERIAL_CDC         2 // 1 for Arduino class library and 2 for PJRC C library. Comment out or set to 0 to use UART communication.
 #endif
@@ -69,14 +77,14 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // **********************
 //#define MODBUS_ENABLE           1 // Set to 1 for auto direction, 2 for direction signal on auxiliary output pin.
 //#define WEBUI_ENABLE            3 // Enable ESP3D-WEBUI plugin along with networking and SD card plugins.
-//#define ETHERNET_ENABLE         1 // Ethernet streaming. Enables networking plugin.
-//#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
-//#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
+#define ETHERNET_ENABLE         1 // Ethernet streaming. Enables networking plugin.
+#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
+#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
 //#define QEI_ENABLE              1 // Enable quadrature encoder interfaces. Max value is 1. Requires encoder plugin.
-//#define MPG_ENABLE              1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
+#define MPG_ENABLE              2 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.
                                     // 2: Mode switching is by the CMD_MPG_MODE_TOGGLE (0x8B) command character.
-//#define KEYPAD_ENABLE           1 // 1: uses a I2C keypad for input.
+//#define KEYPAD_ENABLE           2 // 1: uses a I2C keypad for input.
                                     // 2: uses a serial stream for input. If MPG_ENABLE is set > 0 the serial stream is shared with the MPG.
 //#define DISPLAY_ENABLE          9 // Set to 9 for I2C display protocol, 17 for I2C LED protocol.
 //#define MACROS_ENABLE           1 // Macros plugin. For macros that can be triggered by keypad plugin or auxiliary inputs.
@@ -101,8 +109,10 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //#define BLTOUCH_ENABLE          1 // Enable M401/M402 BLTouch support. Requires and claims one auxiliary PWM servo output.
 //#define EVENTOUT_ENABLE         1 // Enable binding events (triggers) to control auxiliary outputs.
 //#define ESP_AT_ENABLE           1 // Enable support for Telnet communication via UART connected ESP32 running ESP-AT.
-//#define FEED_OVERRIDE_ENABLE    1 // Enable M200 feed override control.
+#define FEED_OVERRIDE_ENABLE    1 // Enable M200 feed override control.
 //#define HOMING_PULLOFF_ENABLE   1 // Enable per axis homing pulloff distance settings.
+#define ENABLE_BACKLASH_COMPENSATION On // Enable backlash compensation for all axes.
+#define ADD_TO_RT_REPORT_ENABLE 1 // Enable plugin to add unit info to real-time status report.
 
 // IO expanders:
 //
@@ -116,12 +126,12 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //#define PROBE2_ENABLE           1 // Enable second regular probe input, depending on the board the input assigned may be predefined.
 //#define TOOLSETTER_ENABLE       1 // Enable toolsetter input, depending on the board the input assigned may be predefined.
 //#define SAFETY_DOOR_ENABLE      1
-//#define MOTOR_FAULT_ENABLE      1
+#define MOTOR_FAULT_ENABLE      1 // Use Auxin pin ST0 for motor fault input.
 //#define MOTOR_WARNING_ENABLE    1
 //#define PROBE_DISCONNECT_ENABLE 1
 //#define STOP_DISABLE_ENABLE     1
-//#define BLOCK_DELETE_ENABLE     1
-//#define SINGLE_BLOCK_ENABLE     1
+#define BLOCK_DELETE_ENABLE     1 // Use Door pin for block delete input.
+#define SINGLE_BLOCK_ENABLE     1 // Use LIMB 28 for single block input.
 //#define LIMITS_OVERRIDE_ENABLE  1
 
 // If the selected board map supports more than three motors ganging and/or auto-squaring
@@ -140,8 +150,8 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //
 
 #if ETHERNET_ENABLE || WEBUI_ENABLE
-//#define TELNET_ENABLE        1 // Telnet daemon - requires Ethernet streaming enabled.
-//#define WEBSOCKET_ENABLE     1 // Websocket daemon - requires Ethernet streaming enabled.
+#define TELNET_ENABLE        1 // Telnet daemon - requires Ethernet streaming enabled.
+#define WEBSOCKET_ENABLE     1 // Websocket daemon - requires Ethernet streaming enabled.
 //#define MDNS_ENABLE          1 // mDNS daemon.
 //#define SSDP_ENABLE          1 // SSDP daemon - requires HTTP enabled.
 //#define MQTT_ENABLE          1 // MQTT client API, only enable if needed by plugin code.
