@@ -27,29 +27,43 @@
 //#define BOARD_E5XMCS_T41
 //#define BOARD_GRBLHAL2000
 //#define BOARD_T40X101
-//#define BOARD_T41U5XBB
+#define BOARD_T41U5XBB
 //#define BOARD_T41U5XBB_SS // For a modified T41U5XBB board, allows spindle sync to be enabled.
 //#define BOARD_T41BB5X_PRO
 //#define BOARD_MY_MACHINE // Add my_machine_map.h before enabling this!
 
 /*
-              Plugin: | ETHERNET¹ | SDCARD¹ | KEYPAD | EEPROM | N_AXIS |
+              Plugin: | ETHERNETï¿½ | SDCARDï¿½ | KEYPAD | EEPROM | N_AXIS |
 ----------------------|-----------|---------|--------|--------|--------|
-BOARD_T40X101         | no        | no      | yes    | yes³   | max 4  |
-BOARD_T41U5XBB        | yes       | yes     | yes    | yes³   | max 5  |
+BOARD_T40X101         | no        | no      | yes    | yesï¿½   | max 4  |
+BOARD_T41U5XBB        | yes       | yes     | yes    | yesï¿½   | max 5  |
 BOARD_T41BB5X_PRO     | yes       | yes     | yes    | yes    | max 5  |
-BOARD_CNC_BOOSTERPACK | yes²      | yes     | yes    | yes    | max 3  |
+BOARD_CNC_BOOSTERPACK | yesï¿½      | yes     | yes    | yes    | max 3  |
 BOARD_GRBLHAL2000     | yes       | yes     | yes    | yes    | max 5  |
 
-¹ Teensy 4.1 only
-² External magjack.
-³ EEPROM is optional and must be added to the board.
+ï¿½ Teensy 4.1 only
+ï¿½ External magjack.
+ï¿½ EEPROM is optional and must be added to the board.
 
 N_AXIS has a default value of 3, edit grbl\config.h to increase.
 
 */
 
 // Configuration
+#define ADD_TO_RT_REPORT_ENABLE 1 // Enable plugin to add unit info to real-time status report.
+#define SDCARD_UPLOAD_ENABLE    1 // Enable plugin to upload files to SD card via the $FUP=<filename>,<bytes>, requires SD card plugin and a serial stream for input.
+//#define N_AXIS 4 // Number of axes NEED TO EDIT CONFIG.H
+//#define MIN_FEED_RATE_OVERRIDE 1 // Set minimum feed rate override to 1%
+//#define MAX_FEED_RATE_OVERRIDE 200 // Set maximum feed rate override to 200%
+//#define DEFAULT_REPORT_INCHES On // Default to inches in status reports
+//#define ENABLE_JERK_ACCELERATION On // Enable to use 3rd order acceleration calculations. May need more processing power, a FPU will help.
+//#define ENABLE_ACCELERATION_PROFILES Off // Enable to allow G-Code changeable acceleration profiles.
+//#define ACCELERATION_TICKS_PER_SECOND 2000 // (50-4000) 
+//N_TOOLS is defined in grbl/config.h, edit to enable file based tool table support, max. 32 tools allowed.
+
+
+
+
 // Uncomment to enable, for some a value > 1 may be assigned, if so the default value is shown.
 
 #ifndef USB_SERIAL_CDC
@@ -72,9 +86,9 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // **********************
 //#define MODBUS_ENABLE           1 // Set to 1 for auto direction, 2 for direction signal on auxiliary output pin.
 //#define WEBUI_ENABLE            3 // Enable ESP3D-WEBUI plugin along with networking and SD card plugins.
-//#define ETHERNET_ENABLE         1 // Ethernet streaming. Enables networking plugin.
-//#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
-//#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
+#define ETHERNET_ENABLE         1 // Ethernet streaming. Enables networking plugin.
+#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
+#define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
 //#define ENCODER_ENABLE          1 // Enable encoder plugin and quadrature encoder interface. Set to to 2 if select input is not required or available.
 //#define MPG_ENABLE              1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.
@@ -132,13 +146,13 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //#define PROBE_DISCONNECT_ENABLE 1
 //#define STOP_DISABLE_ENABLE     1
 //#define BLOCK_DELETE_ENABLE     1
-//#define SINGLE_BLOCK_ENABLE     1
+#define SINGLE_BLOCK_ENABLE     1
 //#define LIMITS_OVERRIDE_ENABLE  1
 
 // If the selected board map supports more than three motors ganging and/or auto-squaring
 // of axes can be enabled here.
 //#define X_GANGED             1
-//#define X_AUTO_SQUARE        1
+#define X_AUTO_SQUARE        1
 //#define Y_GANGED             1
 //#define Y_AUTO_SQUARE        1
 //#define Z_GANGED             1
@@ -151,8 +165,8 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //
 
 #if ETHERNET_ENABLE || WEBUI_ENABLE
-//#define TELNET_ENABLE        1 // Telnet daemon - requires Ethernet streaming enabled.
-//#define WEBSOCKET_ENABLE     1 // Websocket daemon - requires Ethernet streaming enabled.
+#define TELNET_ENABLE        1 // Telnet daemon - requires Ethernet streaming enabled.
+#define WEBSOCKET_ENABLE     1 // Websocket daemon - requires Ethernet streaming enabled.
 //#define MDNS_ENABLE          1 // mDNS daemon.
 //#define SSDP_ENABLE          1 // SSDP daemon - requires HTTP enabled.
 //#define MQTT_ENABLE          1 // MQTT client API, only enable if needed by plugin code.
