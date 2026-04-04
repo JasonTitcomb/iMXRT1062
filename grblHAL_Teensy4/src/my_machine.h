@@ -62,8 +62,6 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //N_TOOLS is defined in grbl/config.h, edit to enable file based tool table support, max. 32 tools allowed.
 
 
-
-
 // Uncomment to enable, for some a value > 1 may be assigned, if so the default value is shown.
 
 #ifndef USB_SERIAL_CDC
@@ -152,9 +150,9 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // If the selected board map supports more than three motors ganging and/or auto-squaring
 // of axes can be enabled here.
 //#define X_GANGED             1
-#define X_AUTO_SQUARE        1
+//#define X_AUTO_SQUARE        1
 //#define Y_GANGED             1
-//#define Y_AUTO_SQUARE        1
+#define Y_AUTO_SQUARE        1
 //#define Z_GANGED             1
 //#define Z_AUTO_SQUARE        1
 // For ganged axes the limit switch input (if available) can be configured to act as a max travel limit switch.
