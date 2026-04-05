@@ -94,7 +94,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //#define KEYPAD_ENABLE           1 // 1: uses a I2C keypad for input.
                                     // 2: uses a serial stream for input. If MPG_ENABLE is set > 0 the serial stream is shared with the MPG.
 //#define DISPLAY_ENABLE          9 // Set to 9 for I2C display protocol, 17 for I2C LED protocol.
-//#define MACROS_ENABLE           1 // Macros plugin. For macros that can be triggered by keypad plugin or auxiliary inputs.
+#define MACROS_ENABLE           1 // Macros plugin. For macros that can be triggered by keypad plugin or auxiliary inputs.
                                     // Set to 1 for aux input triggers, 2 for keypad triggers or 3 for both.
 //#define N_MACROS                1 // Number of macros to enable, max 8. If commented out default is 4 when triggered by aux inputs, 8 otherwise.
 //#define PLASMA_ENABLE           1 // Plasma/THC plugin. To be completed.
