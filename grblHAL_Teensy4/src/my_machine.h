@@ -85,7 +85,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //#define MODBUS_ENABLE           1 // Set to 1 for auto direction, 2 for direction signal on auxiliary output pin.
 //#define WEBUI_ENABLE            3 // Enable ESP3D-WEBUI plugin along with networking and SD card plugins.
 #define ETHERNET_ENABLE         1 // Ethernet streaming. Enables networking plugin.
-#define SDCARD_ENABLE           1 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
+#define SDCARD_ENABLE           2 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
 #define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
 //#define ENCODER_ENABLE          1 // Enable encoder plugin and quadrature encoder interface. Set to to 2 if select input is not required or available.
 //#define MPG_ENABLE              1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
