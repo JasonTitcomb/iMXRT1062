@@ -144,7 +144,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 //#define PROBE_DISCONNECT_ENABLE 1
 //#define STOP_DISABLE_ENABLE     1
 //#define BLOCK_DELETE_ENABLE     1
-#define SINGLE_BLOCK_ENABLE     1
+//#define SINGLE_BLOCK_ENABLE     1
 //#define LIMITS_OVERRIDE_ENABLE  1
 
 // If the selected board map supports more than three motors ganging and/or auto-squaring
