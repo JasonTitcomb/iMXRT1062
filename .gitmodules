@@ -45,4 +45,4 @@
 	url = https://github.com/grblHAL/Plugin_embroidery
 [submodule "grblHAL_Teensy4/src/plugins"]
 	path = grblHAL_Teensy4/src/plugins
-	url = https://github.com/grblHAL/Plugins_misc/
+	url = https://github.com/JasonTitcomb/Plugins_misc

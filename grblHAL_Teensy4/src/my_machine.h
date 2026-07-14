@@ -76,13 +76,16 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // If none are specified the default PWM spindle is instantiated.
 // Spindle definitions can be found in grbl/spindle_control.h.
 // More here https://github.com/grblHAL/Plugins_spindle
-//#define SPINDLE0_ENABLE         SPINDLE_HUANYANG1
+#define SPINDLE0_ENABLE  -1//       SPINDLE_HUANYANG1
 //#define SPINDLE1_ENABLE         SPINDLE_PWM0
 //#define SPINDLE2_ENABLE         SPINDLE_NONE
 //#define SPINDLE2_ENABLE         SPINDLE_NONE
 //#define SPINDLE_OFFSET          1 // Uncomment to enable settings for laser spindle XY-offset.
 // **********************
-//#define MODBUS_ENABLE           1 // Set to 1 for auto direction, 2 for direction signal on auxiliary output pin.
+#define MODBUS_ENABLE           1 // Enable Modbus RTU. Use 3 only if your transceiver exposes a DE/RE control pin.
+//#define MODBUS_RTU_STREAM       1
+// #define MODBUS_DIR_AUX        0 // Uncomment only if you have a separate DE/RE pin wired to aux output 0 (pin 31).
+
 //#define WEBUI_ENABLE            3 // Enable ESP3D-WEBUI plugin along with networking and SD card plugins.
 #define ETHERNET_ENABLE         1 // Ethernet streaming. Enables networking plugin.
 #define SDCARD_ENABLE           2 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
