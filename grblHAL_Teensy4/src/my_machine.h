@@ -52,6 +52,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // Configuration
 #define ADD_TO_RT_REPORT_ENABLE 1 // Enable plugin to add unit info to real-time status report.
 #define SDCARD_UPLOAD_ENABLE    1 // Enable plugin to upload files to SD card via the $FUP=<filename>,<bytes>, requires SD card plugin and a serial stream for input.
+#define RPM_FEEDBACK_ENABLE 1 // Enable plugin to add spindle RPM feedback to real-time status report. Requires a hall sensor or similar connected to an input pin.
 //#define N_AXIS 4 // Number of axes NEED TO EDIT CONFIG.H
 //#define MIN_FEED_RATE_OVERRIDE 1 // Set minimum feed rate override to 1%
 //#define MAX_FEED_RATE_OVERRIDE 200 // Set maximum feed rate override to 200%
@@ -76,13 +77,13 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // If none are specified the default PWM spindle is instantiated.
 // Spindle definitions can be found in grbl/spindle_control.h.
 // More here https://github.com/grblHAL/Plugins_spindle
-#define SPINDLE0_ENABLE  -1//       SPINDLE_HUANYANG1
+
 //#define SPINDLE1_ENABLE         SPINDLE_PWM0
 //#define SPINDLE2_ENABLE         SPINDLE_NONE
 //#define SPINDLE2_ENABLE         SPINDLE_NONE
 //#define SPINDLE_OFFSET          1 // Uncomment to enable settings for laser spindle XY-offset.
 // **********************
-#define MODBUS_ENABLE           1 // Enable Modbus RTU. Use 3 only if your transceiver exposes a DE/RE control pin.
+
 //#define MODBUS_RTU_STREAM       1
 // #define MODBUS_DIR_AUX        0 // Uncomment only if you have a separate DE/RE pin wired to aux output 0 (pin 31).
 
@@ -91,7 +92,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 #define SDCARD_ENABLE           2 // Run gcode programs from SD card. Set to 2 to enable YModem upload.
 #define LITTLEFS_ENABLE         1 // Enable flash based storage, automatically enabled if WebUI is enabled. Set to 2 to mount as root.
 //#define ENCODER_ENABLE          1 // Enable encoder plugin and quadrature encoder interface. Set to to 2 if select input is not required or available.
-//#define MPG_ENABLE              1 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
+#define MPG_ENABLE              2 // Enable MPG interface. Requires a serial stream and means to switch between normal and MPG mode.
                                     // 1: Mode switching is by handshake pin.
                                     // 2: Mode switching is by the CMD_MPG_MODE_TOGGLE (0x8B) command character.
 //#define KEYPAD_ENABLE           1 // 1: uses a I2C keypad for input.
