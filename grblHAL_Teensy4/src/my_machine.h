@@ -52,7 +52,7 @@ N_AXIS has a default value of 3, edit grbl\config.h to increase.
 // Configuration
 #define ADD_TO_RT_REPORT_ENABLE 1 // Enable plugin to add unit info to real-time status report.
 #define SDCARD_UPLOAD_ENABLE    1 // Enable plugin to upload files to SD card via the $FUP=<filename>,<bytes>, requires SD card plugin and a serial stream for input.
-#define RPM_FEEDBACK_ENABLE 1 // Enable plugin to add spindle RPM feedback to real-time status report. Requires a hall sensor or similar connected to an input pin.
+//#define RPM_FEEDBACK_ENABLE 1 // Enable plugin to add spindle RPM feedback to real-time status report. Requires a hall sensor or similar connected to an input pin.
 //#define N_AXIS 4 // Number of axes NEED TO EDIT CONFIG.H
 //#define MIN_FEED_RATE_OVERRIDE 1 // Set minimum feed rate override to 1%
 //#define MAX_FEED_RATE_OVERRIDE 200 // Set maximum feed rate override to 200%
