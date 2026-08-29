@@ -2376,7 +2376,7 @@ static void disable_irq (void)
 }
 
 // Configures perhipherals when settings are initialized or changed
-FLASHMEM static void settings_changed (settings_t *settings, settings_changed_flags_t changed)
+FLASHMEM static void on_settings_changed (settings_t *settings, settings_changed_flags_t changed)
 {
     if(IOInitDone) {
 
@@ -2914,22 +2914,8 @@ FLASHMEM static bool driver_setup (settings_t *settings)
 
     IOInitDone = settings->version.id == 23;
 
-    hal.settings_changed(settings, (settings_changed_flags_t){0});
+    grbl.on_settings_changed(settings, (settings_changed_flags_t){0});
     hal.stepper.go_idle(true);
-
-#if IOPORTS_ENABLE
-    ioports_init();
-#endif
-
-#if SDCARD_ENABLE
-    sdcard_events_t *card = sdcard_init();
-    card->on_mount = sdcard_mount;
-    card->on_unmount = sdcard_unmount;
-#endif
-
-#if LITTLEFS_ENABLE
-    fs_littlefs_mount(LITTLEFS_MOUNT_DIR, t4_littlefs_hal());
-#endif
 
 #if ETHERNET_ENABLE
     grbl_enet_start();
@@ -3086,7 +3072,7 @@ FLASHMEM bool driver_init (void)
     hal.rx_buffer_size = RX_BUFFER_SIZE;
     hal.get_free_mem = get_free_mem;
     hal.delay_ms = driver_delay_ms;
-    hal.settings_changed = settings_changed;
+    grbl.on_settings_changed = on_settings_changed;
 
     hal.stepper.wake_up = stepperWakeUp;
     hal.stepper.go_idle = stepperGoIdle;
@@ -3361,6 +3347,16 @@ FLASHMEM bool driver_init (void)
  #endif
 
 #endif // DRIVER_SPINDLE1_ENABLE
+
+#if SDCARD_ENABLE
+    sdcard_events_t *card = sdcard_init();
+    card->on_mount = sdcard_mount;
+    card->on_unmount = sdcard_unmount;
+#endif
+
+#if LITTLEFS_ENABLE
+    fs_littlefs_mount(LITTLEFS_MOUNT_DIR, t4_littlefs_hal());
+#endif
 
 #if TRINAMIC_SPI_ENABLE
     extern void tmc_spi_init (void);
